@@ -89,6 +89,7 @@ class Motorcycles(db.Model):
     def to_json(self):
         return {
             "id":self.id,
+            'user_id':self.user_id,
             'make':self.make,
             'model':self.model,
             'year':self.year,
