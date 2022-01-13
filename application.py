@@ -2,10 +2,15 @@ from flask import Flask, session
 from flask import request, jsonify, json
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
+from flask_s3 import FlaskS3
+from werkzeug.utils import secure_filename 
+from Upload import upload_image
 
 import jwt
 
 app = Flask(__name__)
+app.config['FLASKS3_BUCKET_NAME'] = 'motophoto'
+
 CORS(app)
 bcrypt = Bcrypt(app)
 import os
@@ -17,10 +22,25 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 import models
 models.db.init_app(app)
 
+
+
 def root():
     return 'okkkk'
 app.route('/', methods=["GET"])(root)
 
+
+# @app.route('/upload', methods=["POST"])
+# def upload():
+#     image = request.files["file"]
+#     if image:
+#         filename = secure_filename(image.filename)
+#         # image.save(filename)
+#         # s3.upload_file(Bucket="motophoto", Filename=filename, Key=filename)
+#         print("Upload done")
+#     return "ok"
+    
+    
+    
 # get all the bikes
 @app.route('/motorcycles', methods=["GET"])
 def get_all_bikes():
