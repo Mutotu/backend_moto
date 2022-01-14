@@ -168,9 +168,11 @@ def delete_moto(moto_id):
     print(moto_id)
     try:
         deleted_moto = models.Motorcycles.query.filter_by(id=moto_id).first()
-        # print(deleted_moto)
+        print(deleted_moto)
         # it doesnt delete but it changes the user_id = 0
         # deleted_moto.user_id = 0
+        # model.db.session.add(deleted_moto)
+        # deleted_moto.user_id.remove()
         models.db.session.delete(deleted_moto)
         models.db.session.commit()
         return {
@@ -178,7 +180,7 @@ def delete_moto(moto_id):
             # jsonify(deleted_moto)
         }
     except Exception as e:
-        # print(e)
+        print(e)
         return jsonify({"error" : f'{e}'})
     
     

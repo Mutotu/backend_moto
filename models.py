@@ -74,8 +74,8 @@ class Motorcycles(db.Model):
     price=db.Column(db.Float, nullable=False)
     description = db.Column(db.String, nullable=False)
     photo = db.Column(db.String)
-    rents = db.relationship("Rents", backref="motorcycles", lazy=True)
-    comments = db.relationship("Comments", backref="motorcycles", lazy=True)
+    rents = db.relationship("Rents", backref="motorcycles", lazy=True,cascade="all,delete")
+    comments = db.relationship("Comments", backref="motorcycles", lazy=True, cascade="all,delete")
     def __init__(self,user_id, make,model,year,price,description,photo):
         # self.id=id
         self.user_id = user_id
